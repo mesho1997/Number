@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>??? ??????? - ??????? ?????? ?? ??????</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: #f0f4fa;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+        .card {
+            max-width: 1300px;
+            width: 100%;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        h1 {
+            font-size: 2rem;
+            color: #0b2b4f;
+            margin: 0 0 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .sub {
+            color: #2c3e5c;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            border-right: 5px solid #2b6eb0;
+            padding-right: 20px;
+            background: #e7f0fd;
+            border-radius: 0 14px 14px 0;
+            line-height: 1.6;
+        }
+        .two-col {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+        .col {
+            flex: 1 1 300px;
+            min-width: 280px;
+        }
+        label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1e3a6b;
+            font-size: 1.15rem;
+        }
+        .small-note {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #4a5f7a;
+        }
+        textarea {
+            width: 100%;
+            height: 280px;
+            padding: 15px;
+            border: 2px solid #d6e0ef;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            background: #fbfdff;
+            resize: vertical;
+            transition: 0.15s;
+            direction: ltr;
+            text-align: left;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        textarea:focus {
+            border-color: #2b6eb0;
+            outline: none;
+            box-shadow: 0 0 0 5px rgba(43,110,176,0.1);
+            background: white;
+        }
+        .actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 25px 0 30px;
+        }
+        button {
+            background: #0b2b4f;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 14px 40px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 8px 20px rgba(11,43,79,0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #254b77;
+        }
+        button:hover {
+            background: #1f3f6b;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(11,43,79,0.4);
+        }
+        .secondary-btn {
+            background: #e0e9f5;
+            color: #1e3a6b;
+            box-shadow: none;
+            border: 1px solid #b0c6e0;
+        }
+        .secondary-btn:hover {
+            background: #d0ddec;
+        }
+        .result-area {
+            background: #eef4fc;
+            border-radius: 26px;
+            padding: 22px 28px;
+            border: 2px solid #c2d4ec;
+        }
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .result-header h2 {
+            margin: 0;
+            font-size: 1.7rem;
+            color: #0b2b4f;
+        }
+        .count-badge {
+            background: #1e5ca3;
+            color: white;
+            padding: 6px 24px;
+            border-radius: 40px;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        .result-box {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #aec3e5;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.9;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 300px;
+            overflow-y: auto;
+            direction: ltr;
+            text-align: left;
+        }
+        .copy-btn {
+            background: white;
+            border: 2px solid #1e5ca3;
+            color: #1e5ca3;
+            padding: 10px 30px;
+            border-radius: 40px;
+            font-weight: 600;
+            margin-top: 18px;
+            font-size: 1.05rem;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .copy-btn:hover {
+            background: #1e5ca3;
+            color: white;
+        }
+        .footer-note {
+            font-size: 0.9rem;
+            color: #4a607c;
+            margin-top: 25px;
+            text-align: center;
+            border-top: 1px dashed #c2d4ec;
+            padding-top: 20px;
+        }
+        .example-btn {
+            background: none;
+            border: none;
+            color: #2b6eb0;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .extract-note {
+            background: #f8ffed;
+            border: 1px solid #b5d1a4;
+            border-radius: 30px;
+            padding: 8px 20px;
+            margin-bottom: 20px;
+            color: #2f5e2f;
+            font-size: 0.95rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>?? ??? ??????? ??? ????????</h1>
+    <div class="sub">
+        <span>? ???? ?????? ???????? ???? ????? ??????? (???? ?? 233 ?????? 9 ?????) ???????? ?? ?? ?? ?????.</span><br>
+        <span>• ???????? ??????: ?????? MDR (??????? ???? ???????).<br>• ???????? ???????: ????? ?????? (???? ????? ??? ?? ?????).<br>• ???????: ??????? ???????? ?? ??????? ??????? ???? ???????? ?? ????????.</span>
+    </div>
+
+    <div class="two-col">
+        <div class="col">
+            <label>
+                <span>?? ???????? ?????? (MDR - ??????)</span>
+                <button class="example-btn" id="example1">?? ??? ????? ?????</button>
+            </label>
+            <textarea id="list1" placeholder="???? ??? ????? ??????? ??????? (????? ????)..."></textarea>
+            <div class="extract-note" id="extractInfo1">? ???? ??????? ??????? ???????? ??? ?????</div>
+        </div>
+        <div class="col">
+            <label>
+                <span>?? ???????? ??????? (My Numbers)</span>
+                <button class="example-btn" id="example2">?? ??? ????? ???????</button>
+            </label>
+            <textarea id="list2" placeholder="????? ?????? (???? ????? ?? ?? ?? ???)..."></textarea>
+            <div class="extract-note" id="extractInfo2">? ???? ??????? ??????? ???????? ??? ?????</div>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button id="sortBtn">?? ??? ???????? ??? ???????</button>
+        <button class="secondary-btn" id="resetBtn">??? ????? ??????</button>
+    </div>
+
+    <div class="result-area" id="resultArea">
+        <div class="result-header">
+            <h2>?? ??????? (?????? ??? ???????? ?? MDR)</h2>
+            <span class="count-badge" id="countDisplay">0</span>
+        </div>
+        <div class="result-box" id="resultBox">????? ????? ??? ?? ?????...</div>
+        <button class="copy-btn" id="copyBtn">?? ??? ???????</button>
+    </div>
+
+    <div class="footer-note">
+        ? ??? ??????? ??????? ???? ???? ?? 233 ?????? 9 ????? (?????? 12 ???). ????? ????? ????? ?? ????? ??? ?????.<br>
+        <strong>??????:</strong> ??????? ??????? ???? ??? ????? ??? ?? ???????.
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ?????
+        const list1 = document.getElementById('list1');
+        const list2 = document.getElementById('list2');
+        const sortBtn = document.getElementById('sortBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const resultBox = document.getElementById('resultBox');
+        const countDisplay = document.getElementById('countDisplay');
+        const copyBtn = document.getElementById('copyBtn');
+        const example1 = document.getElementById('example1');
+        const example2 = document.getElementById('example2');
+        const extractInfo1 = document.getElementById('extractInfo1');
+        const extractInfo2 = document.getElementById('extractInfo2');
+
+        // ????? ????? ???????? ???????: ???? ?? 233 ?? 9 ????? (?????? 12 ???)
+        // ???? ?? ???? ????? ??????? ?????? ?? ?????? ?????? ???? ??? 12 ??? ???? ?? 233
+        const phoneRegex = /233\d{9}/g;  // 233 + 9 digits = 12 digit number
+
+        // ???? ???????? ??????? ?? ?? ??
+        function extractNumbers(text) {
+            if (!text) return [];
+            const matches = text.match(phoneRegex);
+            return matches ? matches : [];
+        }
+
+        // ???? ?????? ???? ?????? ??? ?????? ????? (???????)
+        function parseInput(text) {
+            // ?????? ??????? ???????? regex
+            return extractNumbers(text);
+        }
+
+        // ?????
+        function performSort() {
+            const raw1 = list1.value;
+            const raw2 = list2.value;
+
+            const arr1 = parseInput(raw1);
+            const arr2 = parseInput(raw2);
+
+            // ????? ?? ????? ???? ?? ?????? (???? ??????)
+            const set1 = new Set(arr1);
+            const set2 = new Set(arr2);
+
+            // ??????? ??????? ?? ???????? ??????? ??? ???????? ?? ??????
+            const uniqueInSecond = [...set2].filter(item => !set1.has(item));
+
+            // ????? (???????)
+            uniqueInSecond.sort();
+
+            if (uniqueInSecond.length === 0) {
+                resultBox.innerText = '?? ???? ????? ??? ?????? ?? ???????? ???????.';
+            } else {
+                resultBox.innerText = uniqueInSecond.join('\n');
+            }
+            countDisplay.innerText = uniqueInSecond.length;
+
+            // ????? ??????? ?????????
+            extractInfo1.innerText = `? ?????? ${set1.size} ??? ?? ???????? ??????`;
+            extractInfo2.innerText = `? ?????? ${set2.size} ??? ?? ???????? ???????`;
+        }
+
+        // ?????
+        function resetFields() {
+            list1.value = '';
+            list2.value = '';
+            resultBox.innerText = '????? ????? ??? ?? ?????...';
+            countDisplay.innerText = '0';
+            extractInfo1.innerText = '? ???? ??????? ??????? ???????? ??? ?????';
+            extractInfo2.innerText = '? ???? ??????? ??????? ???????? ??? ?????';
+        }
+
+        // ???
+        function copyResult() {
+            const text = resultBox.innerText;
+            if (!text || text === '????? ????? ??? ?? ?????...' || text === '?? ???? ????? ??? ?????? ?? ???????? ???????.') {
+                alert('?? ???? ????? ????? ?? ??????? ?????.');
+                return;
+            }
+            navigator.clipboard.writeText(text).then(() => {
+                alert('? ?? ??? ??????? ??? ???????');
+            }).catch(() => {
+                alert('? ???? ?????? ???? ????? ??????');
+            });
+        }
+
+        // ?????
+        function loadExampleMDR() {
+            list1.value = `Date	Termination	Number	CLI	Currency	Payterm	Payout	Message
+2026-03-13 05:39:52	Ghana New 1	233277777568	Yandex	$	Weekly	0	Your confirmation code: 329-639.
+2026-03-13 05:39:10	Ghana New 1	233277777568	Yandex	$	Weekly	0	Your confirmation code: 788-379.
+2026-03-13 05:39:09	Ghana New 1	233277777568	Yandex	$	Weekly	0	Your confirmation code: 138-488.
+2026-03-13 05:38:58	Ghana New 1	233277777568	Yandex	$	Weekly	0	Your confirmation code: 800-564.
+2026-03-13 05:38:57	Ghana New 1	233277777568	Yandex	$	Weekly	0	Your confirmation code: 136-545.
+2026-03-13 05:38:54	Ghana New 1	233277777568	Yandex	$	Weekly	0	Your confirmation code: 259-265.
+2026-03-13 05:38:53	Ghana New 1	233277777568	Yandex	$	Weekly	0	Your confirmation code: 150-772.
+2026-03-13 05:38:50	Ghana New 1	233277777568	Yandex	$	Weekly	0	Your confirmation code: 194-391.
+2026-03-13 05:38:48	Ghana New 1	233277777568	Yandex	$	Weekly	0	Your confirmation code: 795-269.
+2026-03-13 05:35:29	Ghana New 1	233277777568	Yandex	$	Weekly	0	Your confirmation code: 951094. AftfMNhsVm0
+2026-03-13 05:34:09	Ghana New 1	233271432684	Yandex	$	Weekly	0	Your confirmation code: 295-929.
+2026-03-13 05:34:06	Ghana New 1	233271432684	Yandex	$	Weekly	0	Your confirmation code: 515-548.
+2026-03-13 05:34:05	Ghana New 1	233271432684	Yandex	$	Weekly	0	Your confirmation code: 135-000.
+2026-03-13 05:34:02	Ghana New 1	233271432684	Yandex	$	Weekly	0	Your confirmation code: 323-142.
+2026-03-13 05:34:01	Ghana New 1	233271432684	Yandex	$	Weekly	0	Your confirmation code: 744-998.
+2026-03-13 05:33:58	Ghana New 1	233271432684	Yandex	$	Weekly	0	Your confirmation code: 250-145.
+2026-03-13 05:33:57	Ghana New 1	233271432684	Yandex	$	Weekly	0	Your confirmation code: 884-619.
+2026-03-13 05:33:53	Ghana New 1	233271432684	Yandex	$	Weekly	0	Your confirmation code: 756-118.
+2026-03-13 05:33:51	Ghana New 1	233271432684	Yandex	$	Weekly	0	Your confirmation code: 400-313.
+2026-03-13 05:31:56	Ghana New 1	233271432684	Yandex	$	Weekly	0	Your confirmation code: 518329. AftfMNhsVm0
+2026-03-13 05:30:27	Ghana New 1	233272648793	Yandex	$	Weekly	0	Your confirmation code: 170-342.
+2026-03-13 05:30:25	Ghana New 1	233272648793	Yandex	$	Weekly	0	Your confirmation code: 977-632.
+2026-03-13 05:30:24	Ghana New 1	233272648793	Yandex	$	Weekly	0	Your confirmation code: 668-630.
+2026-03-13 05:30:21	Ghana New 1	233272648793	Yandex	$	Weekly	0	Your confirmation code: 772-220.
+2026-03-13 05:30:20	Ghana New 1	233272648793	Yandex	$	Weekly	0	Your confirmation code: 979-495.
+2026-03-13 05:30:01	Ghana New 1	233272648793	Yandex	$	Weekly	0	Your confirmation code: 311-038.
+2026-03-13 05:30:01	Ghana New 1	233272648793	Yandex	$	Weekly	0	Your confirmation code: 604-988.
+2026-03-13 05:29:57	Ghana New 1	233272648793	Yandex	$	Weekly	0	Your confirmation code: 279-312.
+2026-03-13 05:29:56	Ghana New 1	233272648793	Yandex	$	Weekly	0	Your confirmation code: 627-513.
+2026-03-13 05:27:02	Ghana New 1	233272648793	Yandex	$	Weekly	0	Your confirmation code: 261186. AftfMNhsVm0
+2026-03-13 05:03:31	Ghana New 1	233279198565	Yandex	$	Weekly	0	Your confirmation code: 874-244.
+2026-03-13 05:03:31	Ghana New 1	233279198565	Yandex	$	Weekly	0	Your confirmation code: 507-351.
+2026-03-13 05:02:56	Ghana New 1	233279198565	Yandex	$	Weekly	0	Your confirmation code: 155-732.
+2026-03-13 05:02:55	Ghana New 1	233279198565	Yandex	$	Weekly	0	Your confirmation code: 240-074.
+2026-03-13 05:02:40	Ghana New 1	233279198565	Yandex	$	Weekly	0	Your confirmation code: 352-576.
+2026-03-13 05:02:40	Ghana New 1	233279198565	Yandex	$	Weekly	0	Your confirmation code: 470-141.
+2026-03-13 05:02:37	Ghana New 1	233279198565	Yandex	$	Weekly	0	Your confirmation code: 185-274.
+2026-03-13 05:02:36	Ghana New 1	233279198565	Yandex	$	Weekly	0	Your confirmation code: 258-951.
+2026-03-13 05:01:37	Ghana New 1	233279198565	Yandex	$	Weekly	0	Your confirmation code: 215-025.
+2026-03-13 05:00:03	Ghana New 1	233279198565	Yandex	$	Weekly	0	Your confirmation code: 523581. AftfMNhsVm0
+2026-03-13 04:57:56	Ghana New 1	233578061682	Yandex	$	Weekly	0	Your confirmation code: 599-630.
+2026-03-13 04:57:53	Ghana New 1	233578061682	Yandex	$	Weekly	0	Your confirmation code: 321-649.
+2026-03-13 04:57:51	Ghana New 1	233578061682	Yandex	$	Weekly	0	Your confirmation code: 387-686.
+2026-03-13 04:57:37	Ghana New 1	233578061682	Yandex	$	Weekly	0	Your confirmation code: 730-210.
+2026-03-13 04:57:36	Ghana New 1	233578061682	Yandex	$	Weekly	0	Your confirmation code: 816-770.
+2026-03-13 04:57:33	Ghana New 1	233578061682	Yandex	$	Weekly	0	Your confirmation code: 973-152.
+2026-03-13 04:57:32	Ghana New 1	233578061682	Yandex	$	Weekly	0	Your confirmation code: 200-648.
+2026-03-13 04:57:22	Ghana New 1	233578061682	Yandex	$	Weekly	0	Your confirmation code: 574-512.
+2026-03-13 04:57:21	Ghana New 1	233578061682	Yandex	$	Weekly	0	Your confirmation code: 615-905.
+2026-03-13 04:55:56	Ghana New 1	233578061682	Yandex	$	Weekly	0	Your confirmation code: 321275. AftfMNhsVm0
+2026-03-13 02:28:47	Ghana New 1	233548987007	Yandex	$	Weekly	0	Your confirmation code: 596-797.
+2026-03-13 02:28:19	Ghana New 1	233548987007	Yandex	$	Weekly	0	Your confirmation code: 488-433.
+2026-03-13 02:28:18	Ghana New 1	233548987007	Yandex	$	Weekly	0	Your confirmation code: 500-180.
+2026-03-13 02:28:16	Ghana New 1	233548987007	Yandex	$	Weekly	0	Your confirmation code: 602-589.
+2026-03-13 02:28:15	Ghana New 1	233548987007	Yandex	$	Weekly	0	Your confirmation code: 736-067.
+2026-03-13 02:28:11	Ghana New 1	233548987007	Yandex	$	Weekly	0	Your confirmation code: 712-582.
+2026-03-13 02:28:10	Ghana New 1	233548987007	Yandex	$	Weekly	0	Your confirmation code: 328-635.
+2026-03-13 02:28:03	Ghana New 1	233548987007	Yandex	$	Weekly	0	Your confirmation code: 357-509.
+2026-03-13 02:28:02	Ghana New 1	233548987007	Yandex	$	Weekly	0	Your confirmation code: 156-657.
+2026-03-13 02:26:12	Ghana New 1	233548987007	Yandex	$	Weekly	0	Your confirmation code: 705661. AftfMNhsVm0
+2026-03-13 02:08:57	Ghana New 1	233269159232	Yandex	$	Weekly	0	Your confirmation code: 419-641.
+2026-03-13 02:08:56	Ghana New 1	233269159232	Yandex	$	Weekly	0	Your confirmation code: 114-313.
+2026-03-13 02:08:52	Ghana New 1	233269159232	Yandex	$	Weekly	0	Your confirmation code: 727-040.
+2026-03-13 02:08:51	Ghana New 1	233269159232	Yandex	$	Weekly	0	Your confirmation code: 309-496.
+2026-03-13 02:08:41	Ghana New 1	233269159232	Yandex	$	Weekly	0	Your confirmation code: 741-953.
+2026-03-13 02:08:41	Ghana New 1	233269159232	Yandex	$	Weekly	0	Your confirmation code: 178-272.
+2026-03-13 02:08:38	Ghana New 1	233269159232	Yandex	$	Weekly	0	Your confirmation code: 234-217.
+2026-03-13 02:08:37	Ghana New 1	233269159232	Yandex	$	Weekly	0	Your confirmation code: 228-278.
+2026-03-13 02:07:05	Ghana New 1	233269159232	Yandex	$	Weekly	0	Your confirmation code: 584431. AftfMNhsVm0
+2026-03-13 01:57:06	Ghana New 1	233279747762	Yandex	$	Weekly	0	Your confirmation code: 407-967.
+2026-03-13 01:57:05	Ghana New 1	233279747762	Yandex	$	Weekly	0	Your confirmation code: 528-159.
+2026-03-13 01:56:54	Ghana New 1	233279747762	Yandex	$	Weekly	0	Your confirmation code: 305-027.
+2026-03-13 01:56:53	Ghana New 1	233279747762	Yandex	$	Weekly	0	Your confirmation code: 622-231.
+2026-03-13 01:56:44	Ghana New 1	233279747762	Yandex	$	Weekly	0	Your confirmation code: 575-645.
+2026-03-13 01:56:43	Ghana New 1	233279747762	Yandex	$	Weekly	0	Your confirmation code: 920-176.
+2026-03-13 01:56:41	Ghana New 1	233279747762	Yandex	$	Weekly	0	Your confirmation code: 588-079.
+2026-03-13 01:56:32	Ghana New 1	233279747762	Yandex	$	Weekly	0	Your confirmation code: 631-687.
+2026-03-13 01:55:46	Ghana New 1	233279747762	Yandex	$	Weekly	0	Your confirmation code: 285-217.
+2026-03-13 01:54:58	Ghana New 1	233279747762	Yandex	$	Weekly	0	Your confirmation code: 301-962.
+2026-03-13 01:52:06	Ghana New 1	233279747762	Yandex	$	Weekly	0	Your confirmation code: 653672. AftfMNhsVm0
+0,0,0,80	0	0	0	0	0	0	0`;
+            extractInfo1.innerText = '? ?? ??? ????? ????? MDR';
+        }
+
+        function loadExampleMyNumbers() {
+            list2.value = `233279747762
+233260826246
+233269159232
+233548987007
+233578061682
+233279198565
+233272648793
+233271432684
+233277777568
+233267260561
+233578914172
+233238843891
+233277484841
+233262503441
+233279680262
+233277916469
+233276645602
+233275934885
+233267825239
+233560496454
+233262658687
+233275837459
+233273263754
+233268473340
+233273853816`;
+            extractInfo2.innerText = '? ?? ??? ????? ??????? ??????';
+        }
+
+        // ??? ???????
+        sortBtn.addEventListener('click', performSort);
+        resetBtn.addEventListener('click', resetFields);
+        copyBtn.addEventListener('click', copyResult);
+        example1.addEventListener('click', loadExampleMDR);
+        example2.addEventListener('click', loadExampleMyNumbers);
+
+        // ??? ?? ??? ?? ???? ???? ????? ????? ????????? ??? ????? ??? (???????)
+        // ?????? ??? ?????? ??? ????? ?????? (???????) ???? ?????? ????? ??? ??? ???? ?? ???????
+        window.addEventListener('load', function() {
+            // ???? ?? ???? ???????? (??? ????? ?????? ????? ?????)
+            // ??? ???? ????? ?????.
+        });
+    })();
+</script>
+</body>
+</html>
