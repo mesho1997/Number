@@ -3,266 +3,482 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>??? ??????? - ??????? ?????? ?? ??????</title>
+    <title>مقارنة الأرقام - XISORA</title>
     <style>
         * {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background: #f0f4fa;
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0b2b4f 0%, #1a3f6a 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 15px;
+            padding: 20px;
         }
-        .card {
-            max-width: 1300px;
+
+        .container {
+            max-width: 1400px;
             width: 100%;
-            background: white;
-            border-radius: 30px;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.1);
-            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        h1 {
-            font-size: 2rem;
-            color: #0b2b4f;
-            margin: 0 0 5px;
+
+        .header {
+            background: linear-gradient(135deg, #1e3a6b, #0b2b4f);
+            color: white;
+            padding: 30px 40px;
+            border-bottom: 5px solid #ffd966;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header h1 i {
+            color: #ffd966;
+            margin-left: 15px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            padding-right: 20px;
+            border-right: 5px solid #ffd966;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .info-box {
+            background: #f0f7ff;
+            border-radius: 30px;
+            padding: 25px;
+            margin-bottom: 35px;
+            border: 2px solid #cbd6e8;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            flex: 1;
+            min-width: 200px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
-        .sub {
-            color: #2c3e5c;
-            margin-bottom: 30px;
-            font-size: 1rem;
-            border-right: 5px solid #2b6eb0;
-            padding-right: 20px;
-            background: #e7f0fd;
-            border-radius: 0 14px 14px 0;
-            line-height: 1.6;
+
+        .info-icon {
+            background: #1e3a6b;
+            color: #ffd966;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
         }
+
+        .info-text {
+            font-size: 1.1rem;
+            color: #0b2b4f;
+            font-weight: 600;
+        }
+
+        .info-text small {
+            font-size: 0.9rem;
+            color: #4a607c;
+            font-weight: 400;
+            display: block;
+        }
+
         .two-col {
             display: flex;
-            gap: 25px;
+            gap: 30px;
             flex-wrap: wrap;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
+
         .col {
-            flex: 1 1 300px;
-            min-width: 280px;
+            flex: 1 1 400px;
+            background: #f9fcff;
+            border-radius: 30px;
+            padding: 25px;
+            border: 2px solid #e0e9f5;
+            transition: 0.3s;
         }
-        label {
+
+        .col:hover {
+            border-color: #ffd966;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .col-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .col-header h2 {
             color: #1e3a6b;
-            font-size: 1.15rem;
-        }
-        .small-note {
-            font-size: 0.85rem;
-            font-weight: 400;
-            color: #4a5f7a;
-        }
-        textarea {
-            width: 100%;
-            height: 280px;
-            padding: 15px;
-            border: 2px solid #d6e0ef;
-            border-radius: 20px;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            background: #fbfdff;
-            resize: vertical;
-            transition: 0.15s;
-            direction: ltr;
-            text-align: left;
-            white-space: pre;
-            overflow-x: auto;
-        }
-        textarea:focus {
-            border-color: #2b6eb0;
-            outline: none;
-            box-shadow: 0 0 0 5px rgba(43,110,176,0.1);
-            background: white;
-        }
-        .actions {
+            font-size: 1.8rem;
+            font-weight: 700;
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 25px 0 30px;
-        }
-        button {
-            background: #0b2b4f;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 600;
-            padding: 14px 40px;
-            border-radius: 60px;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 8px 20px rgba(11,43,79,0.3);
-            display: inline-flex;
             align-items: center;
             gap: 10px;
-            border: 1px solid #254b77;
         }
-        button:hover {
-            background: #1f3f6b;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(11,43,79,0.4);
+
+        .col-header h2 i {
+            color: #ffd966;
+            font-size: 2rem;
         }
-        .secondary-btn {
-            background: #e0e9f5;
+
+        .example-btn {
+            background: #e9f0fa;
+            border: none;
             color: #1e3a6b;
-            box-shadow: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
             border: 1px solid #b0c6e0;
         }
+
+        .example-btn:hover {
+            background: #ffd966;
+            border-color: #1e3a6b;
+        }
+
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 20px;
+            border: 2px solid #d6e0ef;
+            border-radius: 25px;
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            background: white;
+            resize: vertical;
+            direction: ltr;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        textarea:focus {
+            border-color: #ffd966;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(255, 217, 102, 0.2);
+        }
+
+        .extract-info {
+            background: #e4f0e7;
+            color: #1e5c3b;
+            padding: 12px 20px;
+            border-radius: 50px;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #a5d6b2;
+        }
+
+        .extract-info i {
+            font-size: 1.2rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 35px 0;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, #1e3a6b, #0b2b4f);
+            border: none;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 700;
+            padding: 18px 50px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 10px 25px rgba(11,43,79,0.4);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 2px solid #ffd966;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(11,43,79,0.6);
+            background: linear-gradient(135deg, #0b2b4f, #1e3a6b);
+        }
+
+        .secondary-btn {
+            background: white;
+            border: 2px solid #1e3a6b;
+            color: #1e3a6b;
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 18px 45px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .secondary-btn:hover {
-            background: #d0ddec;
+            background: #f0f7ff;
+            border-color: #ffd966;
         }
+
         .result-area {
-            background: #eef4fc;
-            border-radius: 26px;
-            padding: 22px 28px;
-            border: 2px solid #c2d4ec;
+            background: #f0f7ff;
+            border-radius: 40px;
+            padding: 35px;
+            border: 3px solid #ffd966;
+            margin-top: 20px;
         }
+
         .result-header {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: center;
             flex-wrap: wrap;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
         }
+
         .result-header h2 {
-            margin: 0;
-            font-size: 1.7rem;
-            color: #0b2b4f;
-        }
-        .count-badge {
-            background: #1e5ca3;
-            color: white;
-            padding: 6px 24px;
-            border-radius: 40px;
-            font-size: 1.3rem;
+            color: #1e3a6b;
+            font-size: 2.2rem;
             font-weight: 700;
         }
+
+        .count-badge {
+            background: #1e3a6b;
+            color: #ffd966;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            border: 2px solid #ffd966;
+        }
+
         .result-box {
             background: white;
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid #aec3e5;
+            border-radius: 30px;
+            padding: 25px;
+            border: 2px solid #cbd6e8;
             font-family: 'Courier New', monospace;
-            font-size: 16px;
-            line-height: 1.9;
-            white-space: pre-wrap;
-            word-break: break-all;
-            max-height: 300px;
+            font-size: 18px;
+            line-height: 2;
+            max-height: 350px;
             overflow-y: auto;
             direction: ltr;
             text-align: left;
+            white-space: pre;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
         }
+
         .copy-btn {
             background: white;
-            border: 2px solid #1e5ca3;
-            color: #1e5ca3;
-            padding: 10px 30px;
-            border-radius: 40px;
-            font-weight: 600;
-            margin-top: 18px;
-            font-size: 1.05rem;
-            transition: 0.2s;
-            cursor: pointer;
-        }
-        .copy-btn:hover {
-            background: #1e5ca3;
-            color: white;
-        }
-        .footer-note {
-            font-size: 0.9rem;
-            color: #4a607c;
+            border: 3px solid #1e3a6b;
+            color: #1e3a6b;
+            font-size: 1.3rem;
+            font-weight: 700;
+            padding: 15px 45px;
+            border-radius: 60px;
             margin-top: 25px;
-            text-align: center;
-            border-top: 1px dashed #c2d4ec;
-            padding-top: 20px;
-        }
-        .example-btn {
-            background: none;
-            border: none;
-            color: #2b6eb0;
-            text-decoration: underline;
             cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
+            transition: 0.3s;
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        .extract-note {
-            background: #f8ffed;
-            border: 1px solid #b5d1a4;
-            border-radius: 30px;
-            padding: 8px 20px;
-            margin-bottom: 20px;
-            color: #2f5e2f;
-            font-size: 0.95rem;
-            display: inline-block;
+
+        .copy-btn:hover {
+            background: #1e3a6b;
+            color: #ffd966;
+            border-color: #ffd966;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #0f2a44, #0b2b4f);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 5px solid #ffd966;
+            margin-top: 20px;
+        }
+
+        .developer {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .developer span {
+            color: #ffd966;
+            font-size: 2rem;
+            margin: 0 10px;
+        }
+
+        .copyright {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            .primary-btn, .secondary-btn {
+                font-size: 1.1rem;
+                padding: 15px 30px;
+            }
         }
     </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-<div class="card">
-    <h1>?? ??? ??????? ??? ????????</h1>
-    <div class="sub">
-        <span>? ???? ?????? ???????? ???? ????? ??????? (???? ?? 233 ?????? 9 ?????) ???????? ?? ?? ?? ?????.</span><br>
-        <span>• ???????? ??????: ?????? MDR (??????? ???? ???????).<br>• ???????? ???????: ????? ?????? (???? ????? ??? ?? ?????).<br>• ???????: ??????? ???????? ?? ??????? ??????? ???? ???????? ?? ????????.</span>
-    </div>
-
-    <div class="two-col">
-        <div class="col">
-            <label>
-                <span>?? ???????? ?????? (MDR - ??????)</span>
-                <button class="example-btn" id="example1">?? ??? ????? ?????</button>
-            </label>
-            <textarea id="list1" placeholder="???? ??? ????? ??????? ??????? (????? ????)..."></textarea>
-            <div class="extract-note" id="extractInfo1">? ???? ??????? ??????? ???????? ??? ?????</div>
-        </div>
-        <div class="col">
-            <label>
-                <span>?? ???????? ??????? (My Numbers)</span>
-                <button class="example-btn" id="example2">?? ??? ????? ???????</button>
-            </label>
-            <textarea id="list2" placeholder="????? ?????? (???? ????? ?? ?? ?? ???)..."></textarea>
-            <div class="extract-note" id="extractInfo2">? ???? ??????? ??????? ???????? ??? ?????</div>
+<div class="container">
+    <div class="header">
+        <h1>
+            <i class="fas fa-chart-simple"></i>
+            XISORA <span style="color: #ffd966;">|</span> مقارنة الأرقام
+        </h1>
+        <div class="subtitle">
+            <i class="fas fa-arrow-left"></i>
+            استخراج تلقائي للأرقام من أي نصوص - فرز الأرقام غير المشتركة
         </div>
     </div>
 
-    <div class="actions">
-        <button id="sortBtn">?? ??? ???????? ??? ???????</button>
-        <button class="secondary-btn" id="resetBtn">??? ????? ??????</button>
-    </div>
-
-    <div class="result-area" id="resultArea">
-        <div class="result-header">
-            <h2>?? ??????? (?????? ??? ???????? ?? MDR)</h2>
-            <span class="count-badge" id="countDisplay">0</span>
+    <div class="main-content">
+        <!-- Info Box -->
+        <div class="info-box">
+            <div class="info-item">
+                <div class="info-icon"><i class="fas fa-file-alt"></i></div>
+                <div class="info-text">
+                    المجموعة الأولى (MDR)
+                    <small>يتم استخراج الأرقام تلقائياً من التقرير</small>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon"><i class="fas fa-list"></i></div>
+                <div class="info-text">
+                    المجموعة الثانية (My Numbers)
+                    <small>قائمة أرقامك (يمكن لصق أي نص)</small>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon"><i class="fas fa-star"></i></div>
+                <div class="info-text">
+                    النتيجة
+                    <small>الأرقام الموجودة في مجموعتك فقط</small>
+                </div>
+            </div>
         </div>
-        <div class="result-box" id="resultBox">????? ????? ??? ?? ?????...</div>
-        <button class="copy-btn" id="copyBtn">?? ??? ???????</button>
+
+        <!-- Two Columns -->
+        <div class="two-col">
+            <!-- Column 1: MDR -->
+            <div class="col">
+                <div class="col-header">
+                    <h2><i class="fas fa-file-signature"></i> MDR - التقارير</h2>
+                    <button class="example-btn" id="example1">
+                        <i class="fas fa-paste"></i> تجربة
+                    </button>
+                </div>
+                <textarea id="list1" placeholder="الصق هنا محتوى التقرير بالكامل (جدول، نصوص...)"></textarea>
+                <div class="extract-info" id="extractInfo1">
+                    <i class="fas fa-robot"></i>
+                    <span>⏳ في انتظار اللصق والفرز</span>
+                </div>
+            </div>
+
+            <!-- Column 2: My Numbers -->
+            <div class="col">
+                <div class="col-header">
+                    <h2><i class="fas fa-mobile-alt"></i> My Numbers</h2>
+                    <button class="example-btn" id="example2">
+                        <i class="fas fa-paste"></i> تجربة
+                    </button>
+                </div>
+                <textarea id="list2" placeholder="قائمة أرقامك (يمكن لصقها مع أي نص آخر)..."></textarea>
+                <div class="extract-info" id="extractInfo2">
+                    <i class="fas fa-robot"></i>
+                    <span>⏳ في انتظار اللصق والفرز</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="actions">
+            <button class="primary-btn" id="sortBtn">
+                <i class="fas fa-magnifying-glass"></i>
+                فرز واستخراج غير المتكرر
+            </button>
+            <button class="secondary-btn" id="resetBtn">
+                <i class="fas fa-rotate-right"></i>
+                تفريغ الحقول
+            </button>
+        </div>
+
+        <!-- Result Area -->
+        <div class="result-area">
+            <div class="result-header">
+                <h2><i class="fas fa-star" style="color: #ffd966;"></i> النتيجة</h2>
+                <span class="count-badge" id="countDisplay">0</span>
+            </div>
+            <div class="result-box" id="resultBox">اضغط على زر الفرز لعرض النتيجة...</div>
+            <button class="copy-btn" id="copyBtn">
+                <i class="fas fa-copy"></i>
+                نسخ الأرقام
+            </button>
+        </div>
     </div>
 
-    <div class="footer-note">
-        ? ??? ??????? ??????? ???? ???? ?? 233 ?????? 9 ????? (?????? 12 ???). ????? ????? ????? ?? ????? ??? ?????.<br>
-        <strong>??????:</strong> ??????? ??????? ???? ??? ????? ??? ?? ???????.
+    <!-- Footer with Developer Name -->
+    <div class="footer">
+        <div class="developer">
+            <i class="fas fa-code"></i>
+            <span>Devloper: Mohamed</span>
+            <i class="fas fa-crown" style="color: #ffd966;"></i>
+        </div>
+        <div class="copyright">
+            <i class="far fa-copyright"></i>
+            2026 XISORA Networks LTD | جميع الحقوق محفوظة
+        </div>
     </div>
 </div>
 
 <script>
     (function() {
-        // ?????
+        // Elements
         const list1 = document.getElementById('list1');
         const list2 = document.getElementById('list2');
         const sortBtn = document.getElementById('sortBtn');
@@ -275,78 +491,79 @@
         const extractInfo1 = document.getElementById('extractInfo1');
         const extractInfo2 = document.getElementById('extractInfo2');
 
-        // ????? ????? ???????? ???????: ???? ?? 233 ?? 9 ????? (?????? 12 ???)
-        // ???? ?? ???? ????? ??????? ?????? ?? ?????? ?????? ???? ??? 12 ??? ???? ?? 233
-        const phoneRegex = /233\d{9}/g;  // 233 + 9 digits = 12 digit number
+        // Regular expression for Ghana numbers (233 + 9 digits)
+        const phoneRegex = /233\d{9}/g;
 
-        // ???? ???????? ??????? ?? ?? ??
+        // Extract numbers from text
         function extractNumbers(text) {
             if (!text) return [];
             const matches = text.match(phoneRegex);
             return matches ? matches : [];
         }
 
-        // ???? ?????? ???? ?????? ??? ?????? ????? (???????)
-        function parseInput(text) {
-            // ?????? ??????? ???????? regex
-            return extractNumbers(text);
+        // Update extract info
+        function updateExtractInfo() {
+            const nums1 = extractNumbers(list1.value);
+            const nums2 = extractNumbers(list2.value);
+            const unique1 = new Set(nums1);
+            const unique2 = new Set(nums2);
+            
+            extractInfo1.innerHTML = `<i class="fas fa-check-circle"></i> تم استخراج ${unique1.size} رقم من التقرير`;
+            extractInfo2.innerHTML = `<i class="fas fa-check-circle"></i> تم استخراج ${unique2.size} رقم من قائمتك`;
         }
 
-        // ?????
+        // Perform sorting
         function performSort() {
             const raw1 = list1.value;
             const raw2 = list2.value;
 
-            const arr1 = parseInput(raw1);
-            const arr2 = parseInput(raw2);
+            const arr1 = extractNumbers(raw1);
+            const arr2 = extractNumbers(raw2);
 
-            // ????? ?? ????? ???? ?? ?????? (???? ??????)
             const set1 = new Set(arr1);
             const set2 = new Set(arr2);
 
-            // ??????? ??????? ?? ???????? ??????? ??? ???????? ?? ??????
+            // Numbers in set2 that are not in set1
             const uniqueInSecond = [...set2].filter(item => !set1.has(item));
-
-            // ????? (???????)
             uniqueInSecond.sort();
 
+            // Display result
             if (uniqueInSecond.length === 0) {
-                resultBox.innerText = '?? ???? ????? ??? ?????? ?? ???????? ???????.';
+                resultBox.innerText = 'لا توجد أرقام غير متكررة في المجموعة الثانية.';
             } else {
                 resultBox.innerText = uniqueInSecond.join('\n');
             }
             countDisplay.innerText = uniqueInSecond.length;
 
-            // ????? ??????? ?????????
-            extractInfo1.innerText = `? ?????? ${set1.size} ??? ?? ???????? ??????`;
-            extractInfo2.innerText = `? ?????? ${set2.size} ??? ?? ???????? ???????`;
+            // Update extract info
+            updateExtractInfo();
         }
 
-        // ?????
+        // Reset fields
         function resetFields() {
             list1.value = '';
             list2.value = '';
-            resultBox.innerText = '????? ????? ??? ?? ?????...';
+            resultBox.innerText = 'اضغط على زر الفرز لعرض النتيجة...';
             countDisplay.innerText = '0';
-            extractInfo1.innerText = '? ???? ??????? ??????? ???????? ??? ?????';
-            extractInfo2.innerText = '? ???? ??????? ??????? ???????? ??? ?????';
+            extractInfo1.innerHTML = '<i class="fas fa-robot"></i> ⏳ في انتظار اللصق والفرز';
+            extractInfo2.innerHTML = '<i class="fas fa-robot"></i> ⏳ في انتظار اللصق والفرز';
         }
 
-        // ???
+        // Copy result
         function copyResult() {
             const text = resultBox.innerText;
-            if (!text || text === '????? ????? ??? ?? ?????...' || text === '?? ???? ????? ??? ?????? ?? ???????? ???????.') {
-                alert('?? ???? ????? ????? ?? ??????? ?????.');
+            if (!text || text === 'اضغط على زر الفرز لعرض النتيجة...' || text === 'لا توجد أرقام غير متكررة في المجموعة الثانية.') {
+                alert('لا يوجد نتيجة للنسخ أو النتيجة فارغة.');
                 return;
             }
             navigator.clipboard.writeText(text).then(() => {
-                alert('? ?? ??? ??????? ??? ???????');
+                alert('✅ تم نسخ الأرقام إلى الحافظة');
             }).catch(() => {
-                alert('? ???? ?????? ???? ????? ??????');
+                alert('❌ تعذر النسخ، يرجى النسخ يدوياً');
             });
         }
 
-        // ?????
+        // Load example MDR report
         function loadExampleMDR() {
             list1.value = `Date	Termination	Number	CLI	Currency	Payterm	Payout	Message
 2026-03-13 05:39:52	Ghana New 1	233277777568	Yandex	$	Weekly	0	Your confirmation code: 329-639.
@@ -430,9 +647,10 @@
 2026-03-13 01:54:58	Ghana New 1	233279747762	Yandex	$	Weekly	0	Your confirmation code: 301-962.
 2026-03-13 01:52:06	Ghana New 1	233279747762	Yandex	$	Weekly	0	Your confirmation code: 653672. AftfMNhsVm0
 0,0,0,80	0	0	0	0	0	0	0`;
-            extractInfo1.innerText = '? ?? ??? ????? ????? MDR';
+            updateExtractInfo();
         }
 
+        // Load example My Numbers
         function loadExampleMyNumbers() {
             list2.value = `233279747762
 233260826246
@@ -459,22 +677,19 @@
 233273263754
 233268473340
 233273853816`;
-            extractInfo2.innerText = '? ?? ??? ????? ??????? ??????';
+            updateExtractInfo();
         }
 
-        // ??? ???????
+        // Event listeners
         sortBtn.addEventListener('click', performSort);
         resetBtn.addEventListener('click', resetFields);
         copyBtn.addEventListener('click', copyResult);
         example1.addEventListener('click', loadExampleMDR);
         example2.addEventListener('click', loadExampleMyNumbers);
 
-        // ??? ?? ??? ?? ???? ???? ????? ????? ????????? ??? ????? ??? (???????)
-        // ?????? ??? ?????? ??? ????? ?????? (???????) ???? ?????? ????? ??? ??? ???? ?? ???????
-        window.addEventListener('load', function() {
-            // ???? ?? ???? ???????? (??? ????? ?????? ????? ?????)
-            // ??? ???? ????? ?????.
-        });
+        // Update extract info on input
+        list1.addEventListener('input', updateExtractInfo);
+        list2.addEventListener('input', updateExtractInfo);
     })();
 </script>
 </body>
