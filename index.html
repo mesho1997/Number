@@ -433,6 +433,47 @@
             margin: 0 10px;
         }
 
+        .copyright {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        /* زر التواصل عبر واتساب */
+        .contact-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 12px 35px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            margin-top: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .contact-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+            background: linear-gradient(135deg, #128C7E, #075E54);
+        }
+
+        .contact-whatsapp i {
+            font-size: 1.5rem;
+        }
+
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
@@ -443,6 +484,10 @@
             }
             .result-header h2 {
                 font-size: 1.4rem;
+            }
+            .contact-whatsapp {
+                font-size: 1rem;
+                padding: 10px 25px;
             }
         }
     </style>
@@ -589,9 +634,20 @@
             <span>Mohamed-Mesho</span>
             <i class="fas fa-crown" style="color: #ffd966;"></i>
         </div>
-        <div class="copyright">
-            <i class="far fa-copyright"></i>
-            2026 Number | تحليل شامل للتكرار - جميع الحقوق محفوظة Mohamed-Mesho
+        <div class="footer-bottom">
+            <div class="copyright">
+                <i class="far fa-copyright"></i>
+                2026 Number | تحليل شامل للتكرار - جميع الحقوق محفوظة Mohamed-Mesho
+            </div>
+            <!-- زر معلومات التواصل عبر واتساب -->
+            <a href="https://wa.me/201151888199?text=السلام%20عليكم%20أهلاً%20بك%20في%20خدمة%20الدعم%20الفني%20لتطبيق%20مقارنة%20الأرقام" 
+               class="contact-whatsapp" 
+               target="_blank"
+               rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i>
+                معلومات التواصل | واتساب
+                <i class="fas fa-arrow-left"></i>
+            </a>
         </div>
     </div>
 </div>
