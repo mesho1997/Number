@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مقارنة الأرقام - جميع الدول</title>
+    <title>مقارنة الأرقام - جميع الأرقام مع التكرارات</title>
     <style>
         * {
             margin: 0;
@@ -22,7 +22,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1500px;
             width: 100%;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -132,6 +132,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .col-header h2 {
@@ -167,12 +169,12 @@
 
         textarea {
             width: 100%;
-            height: 300px;
+            height: 280px;
             padding: 20px;
             border: 2px solid #d6e0ef;
             border-radius: 25px;
             font-family: 'Courier New', monospace;
-            font-size: 15px;
+            font-size: 14px;
             background: white;
             resize: vertical;
             direction: ltr;
@@ -254,12 +256,21 @@
             border-color: #ffd966;
         }
 
-        .result-area {
+        .results-grid {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .result-card {
+            flex: 1;
+            min-width: 280px;
             background: #f0f7ff;
             border-radius: 40px;
-            padding: 35px;
+            padding: 25px;
             border: 3px solid #ffd966;
-            margin-top: 20px;
+            transition: 0.2s;
         }
 
         .result-header {
@@ -267,21 +278,26 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed #cbd6e8;
+            padding-bottom: 12px;
         }
 
         .result-header h2 {
             color: #1e3a6b;
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .count-badge {
             background: #1e3a6b;
             color: #ffd966;
-            padding: 12px 35px;
+            padding: 8px 28px;
             border-radius: 50px;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 800;
             border: 2px solid #ffd966;
         }
@@ -289,28 +305,63 @@
         .result-box {
             background: white;
             border-radius: 30px;
-            padding: 25px;
+            padding: 20px;
             border: 2px solid #cbd6e8;
             font-family: 'Courier New', monospace;
-            font-size: 18px;
-            line-height: 2;
-            max-height: 350px;
+            font-size: 16px;
+            line-height: 1.8;
+            max-height: 400px;
             overflow-y: auto;
             direction: ltr;
             text-align: left;
-            white-space: pre;
+            white-space: pre-wrap;
+            word-break: break-all;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+        }
+
+        .frequency-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e9f5;
+            padding: 10px 0;
+            font-family: monospace;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .frequency-item:hover {
+            background: #f9f3e0;
+            padding-right: 8px;
+        }
+
+        .frequency-number {
+            font-weight: 700;
+            color: #1e3a6b;
+            direction: ltr;
+            font-size: 15px;
+        }
+
+        .frequency-count {
+            background: #ffd966;
+            color: #1e3a6b;
+            padding: 4px 15px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 13px;
+            min-width: 70px;
+            text-align: center;
         }
 
         .copy-btn {
             background: white;
             border: 3px solid #1e3a6b;
             color: #1e3a6b;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            padding: 15px 45px;
+            padding: 12px 35px;
             border-radius: 60px;
-            margin-top: 25px;
+            margin-top: 20px;
             cursor: pointer;
             transition: 0.3s;
             width: fit-content;
@@ -323,6 +374,42 @@
             background: #1e3a6b;
             color: #ffd966;
             border-color: #ffd966;
+        }
+
+        .stats-bar {
+            margin-top: 25px;
+            background: #fff9e8;
+            border-radius: 35px;
+            padding: 20px;
+            border: 2px solid #ffd966;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            color: #1e3a6b;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #1e3a6b;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #4a607c;
+            margin-top: 5px;
         }
 
         .footer {
@@ -346,11 +433,6 @@
             margin: 0 10px;
         }
 
-        .copyright {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
@@ -359,88 +441,85 @@
                 font-size: 1.1rem;
                 padding: 15px 30px;
             }
+            .result-header h2 {
+                font-size: 1.4rem;
+            }
         }
     </style>
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 <div class="container">
     <div class="header">
         <h1>
-            <i class="fas fa-globe"></i>
-            NUMBER <span style="color: #ffd966;">|</span> مقارنة الأرقام
+            <i class="fas fa-chart-line"></i>
+            NUMBER <span style="color: #ffd966;">|</span> تحليل شامل للتكرار
         </h1>
         <div class="subtitle">
             <i class="fas fa-arrow-left"></i>
-            استخراج تلقائي لجميع أرقام الهواتف - يدعم جميع الدول
+            جميع الأرقام في MDR مع عدد مرات التكرار | الأرقام الفريدة في My Numbers
         </div>
     </div>
 
     <div class="main-content">
-        <!-- Info Box -->
         <div class="info-box">
             <div class="info-item">
-                <div class="info-icon"><i class="fas fa-file-alt"></i></div>
+                <div class="info-icon"><i class="fas fa-chart-simple"></i></div>
                 <div class="info-text">
-                    المجموعة الأولى (MDR)
-                    <small>يتم استخراج الأرقام تلقائياً من أي نص تلصقه</small>
+                    تحليل التكرار الكامل
+                    <small>كل رقم في MDR يظهر مرة واحدة مع عدد مرات ظهوره</small>
                 </div>
             </div>
             <div class="info-item">
-                <div class="info-icon"><i class="fas fa-list"></i></div>
+                <div class="info-icon"><i class="fas fa-code-branch"></i></div>
                 <div class="info-text">
-                    المجموعة الثانية (My Numbers)
-                    <small>قائمة أرقامك - يمكن لصق أي نص</small>
+                    الأرقام غير المتكررة
+                    <small>موجودة في My Numbers فقط</small>
                 </div>
             </div>
             <div class="info-item">
-                <div class="info-icon"><i class="fas fa-star"></i></div>
+                <div class="info-icon"><i class="fas fa-list-ol"></i></div>
                 <div class="info-text">
-                    النتيجة
-                    <small>الأرقام الموجودة في مجموعتك فقط (غير المتكررة)</small>
+                    إحصائيات دقيقة
+                    <small>إجمالي التكرارات والأرقام الفريدة</small>
                 </div>
             </div>
         </div>
 
-        <!-- Two Columns -->
         <div class="two-col">
-            <!-- Column 1: MDR -->
             <div class="col">
                 <div class="col-header">
-                    <h2><i class="fas fa-file-signature"></i> MDR - التقارير</h2>
+                    <h2><i class="fas fa-database"></i> MDR - التقارير</h2>
                     <button class="example-btn" id="example1">
                         <i class="fas fa-paste"></i> تجربة
                     </button>
                 </div>
-                <textarea id="list1" placeholder="الصق هنا أي نص (تقرير، جدول، رسائل...) وسيتم استخراج الأرقام تلقائياً"></textarea>
+                <textarea id="list1" placeholder="الصق هنا أي نص (تقرير، جدول، رسائل...) وسيتم استخراج الأرقام وتحليل التكرار"></textarea>
                 <div class="extract-info" id="extractInfo1">
                     <i class="fas fa-robot"></i>
-                    <span>⏳ في انتظار اللصق والفرز</span>
+                    <span>⏳ في انتظار اللصق</span>
                 </div>
             </div>
 
-            <!-- Column 2: My Numbers -->
             <div class="col">
                 <div class="col-header">
-                    <h2><i class="fas fa-mobile-alt"></i> My Numbers</h2>
+                    <h2><i class="fas fa-address-book"></i> My Numbers</h2>
                     <button class="example-btn" id="example2">
                         <i class="fas fa-paste"></i> تجربة
                     </button>
                 </div>
-                <textarea id="list2" placeholder="الصق هنا قائمة أرقامك أو أي نص وسيتم استخراج الأرقام تلقائياً"></textarea>
+                <textarea id="list2" placeholder="الصق هنا قائمة أرقامك أو أي نص وسيتم استخراج الأرقام"></textarea>
                 <div class="extract-info" id="extractInfo2">
                     <i class="fas fa-robot"></i>
-                    <span>⏳ في انتظار اللصق والفرز</span>
+                    <span>⏳ في انتظار اللصق</span>
                 </div>
             </div>
         </div>
 
-        <!-- Action Buttons -->
         <div class="actions">
             <button class="primary-btn" id="sortBtn">
-                <i class="fas fa-magnifying-glass"></i>
-                فرز واستخراج غير المتكرر
+                <i class="fas fa-chart-pie"></i>
+                تحليل التكرار والمقارنة
             </button>
             <button class="secondary-btn" id="resetBtn">
                 <i class="fas fa-rotate-right"></i>
@@ -448,21 +527,62 @@
             </button>
         </div>
 
-        <!-- Result Area -->
-        <div class="result-area">
-            <div class="result-header">
-                <h2><i class="fas fa-star" style="color: #ffd966;"></i> النتيجة (الأرقام غير المتكررة)</h2>
-                <span class="count-badge" id="countDisplay">0</span>
+        <!-- نتائج التحليل -->
+        <div class="results-grid">
+            <!-- كارد 1: جميع أرقام MDR مع عدد مرات التكرار (كل رقم مرة واحدة) -->
+            <div class="result-card">
+                <div class="result-header">
+                    <h2><i class="fas fa-chart-bar" style="color: #e67e22;"></i> أرقام MDR مع التكرار</h2>
+                    <span class="count-badge" id="totalUniqueBadge">0</span>
+                </div>
+                <div class="result-box" id="allNumbersBox">
+                    <i class="fas fa-info-circle"></i> اضغط على زر التحليل لعرض جميع أرقام MDR مع عدد مرات التكرار
+                </div>
+                <button class="copy-btn" id="copyAllNumbersBtn">
+                    <i class="fas fa-copy"></i> نسخ جميع الأرقام مع التكرار
+                </button>
             </div>
-            <div class="result-box" id="resultBox">اضغط على زر الفرز لعرض النتيجة...</div>
-            <button class="copy-btn" id="copyBtn">
-                <i class="fas fa-copy"></i>
-                نسخ الأرقام
-            </button>
+
+            <!-- كارد 2: الأرقام غير المتكررة (الموجودة في My Numbers فقط) -->
+            <div class="result-card">
+                <div class="result-header">
+                    <h2><i class="fas fa-star" style="color: #ffd966;"></i> أرقام My Numbers الفريدة</h2>
+                    <span class="count-badge" id="uniqueCountBadge">0</span>
+                </div>
+                <div class="result-box" id="uniqueNumbersBox">
+                    <i class="fas fa-info-circle"></i> الأرقام الموجودة في My Numbers وليست في MDR
+                </div>
+                <button class="copy-btn" id="copyUniqueBtn">
+                    <i class="fas fa-copy"></i> نسخ الأرقام الفريدة
+                </button>
+            </div>
+        </div>
+
+        <!-- شريط الإحصائيات -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="stat-value" id="totalMDRCount">0</div>
+                <div class="stat-label">إجمالي الأرقام في MDR</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon"><i class="fas fa-unique"></i></div>
+                <div class="stat-value" id="uniqueMDRCount">0</div>
+                <div class="stat-label">أرقام فريدة في MDR</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon"><i class="fas fa-waveform"></i></div>
+                <div class="stat-value" id="totalMyNumbersCount">0</div>
+                <div class="stat-label">إجمالي My Numbers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon"><i class="fas fa-chart-pie"></i></div>
+                <div class="stat-value" id="uniqueMyCount">0</div>
+                <div class="stat-label">أرقام فريدة في My Numbers</div>
+            </div>
         </div>
     </div>
 
-    <!-- Footer with Developer Name - تم التعديل هنا -->
     <div class="footer">
         <div class="developer">
             <i class="fas fa-code"></i>
@@ -471,120 +591,225 @@
         </div>
         <div class="copyright">
             <i class="far fa-copyright"></i>
-            2026 Number | جميع الحقوق محفوظة  Mohamed-Mesho
+            2026 Number | تحليل شامل للتكرار - جميع الحقوق محفوظة Mohamed-Mesho
         </div>
     </div>
 </div>
 
 <script>
     (function() {
-        // Elements
         const list1 = document.getElementById('list1');
         const list2 = document.getElementById('list2');
         const sortBtn = document.getElementById('sortBtn');
         const resetBtn = document.getElementById('resetBtn');
-        const resultBox = document.getElementById('resultBox');
-        const countDisplay = document.getElementById('countDisplay');
-        const copyBtn = document.getElementById('copyBtn');
+        const allNumbersBox = document.getElementById('allNumbersBox');
+        const uniqueNumbersBox = document.getElementById('uniqueNumbersBox');
+        const totalUniqueBadge = document.getElementById('totalUniqueBadge');
+        const uniqueCountBadge = document.getElementById('uniqueCountBadge');
+        const copyAllNumbersBtn = document.getElementById('copyAllNumbersBtn');
+        const copyUniqueBtn = document.getElementById('copyUniqueBtn');
         const example1 = document.getElementById('example1');
         const example2 = document.getElementById('example2');
         const extractInfo1 = document.getElementById('extractInfo1');
         const extractInfo2 = document.getElementById('extractInfo2');
+        
+        // عناصر الإحصائيات
+        const totalMDRCountSpan = document.getElementById('totalMDRCount');
+        const uniqueMDRCountSpan = document.getElementById('uniqueMDRCount');
+        const totalMyNumbersCountSpan = document.getElementById('totalMyNumbersCount');
+        const uniqueMyCountSpan = document.getElementById('uniqueMyCount');
 
-        // Regular expression for extracting phone numbers
-        // يبحث عن أي أرقام متصلة طولها 7 أرقام فأكثر (وهو مناسب لأرقام الهواتف)
+        // Regular expression for phone numbers (7 digits or more)
         const phoneRegex = /\d{7,}/g;
 
-        // Extract numbers from text
         function extractNumbers(text) {
             if (!text) return [];
             const matches = text.match(phoneRegex);
             return matches ? matches : [];
         }
 
-        // Update extract info
+        // حساب التكرارات لجميع الأرقام (كل رقم مع عدد مرات ظهوره)
+        function getFrequencyMap(numbersArray) {
+            const freq = new Map();
+            for (let num of numbersArray) {
+                freq.set(num, (freq.get(num) || 0) + 1);
+            }
+            return freq;
+        }
+
+        // عرض جميع الأرقام مع عدد مرات التكرار (مرتبة)
+        function displayAllNumbersWithFrequency(freqMap) {
+            if (freqMap.size === 0) {
+                allNumbersBox.innerHTML = '<i class="fas fa-info-circle"></i> لا توجد أرقام في MDR.';
+                totalUniqueBadge.innerText = '0';
+                return;
+            }
+            
+            // تحويل الخريطة إلى مصفوفة وترتيبها حسب الرقم
+            const sortedNumbers = Array.from(freqMap.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+            
+            let html = '<div style="display:flex; flex-direction:column; gap:4px;">';
+            for (let [number, count] of sortedNumbers) {
+                const countText = count === 1 ? 'مرة واحدة' : `${count} مرات`;
+                html += `<div class="frequency-item">
+                            <span class="frequency-number">📞 ${number}</span>
+                            <span class="frequency-count">🔄 ${countText}</span>
+                         </div>`;
+            }
+            html += '</div>';
+            allNumbersBox.innerHTML = html;
+            totalUniqueBadge.innerText = freqMap.size;
+        }
+
+        // عرض الأرقام غير المتكررة (الموجودة في My Numbers وليست في MDR)
+        function displayUniqueNumbers(myNumbersSet, mdrSet) {
+            const uniqueNumbers = [...myNumbersSet].filter(num => !mdrSet.has(num));
+            uniqueNumbers.sort((a, b) => a.localeCompare(b));
+            
+            if (uniqueNumbers.length === 0) {
+                uniqueNumbersBox.innerHTML = '<i class="fas fa-info-circle"></i> لا توجد أرقام فريدة في My Numbers خارج MDR.';
+                uniqueCountBadge.innerText = '0';
+            } else {
+                uniqueNumbersBox.innerHTML = uniqueNumbers.map(num => `📱 ${num}`).join('\n');
+                uniqueCountBadge.innerText = uniqueNumbers.length;
+            }
+            return uniqueNumbers.length;
+        }
+
+        // تحديث واجهة التحليل بالكامل
+        function performAnalysis() {
+            const mdrText = list1.value;
+            const myNumbersText = list2.value;
+
+            const mdrRawNumbers = extractNumbers(mdrText);
+            const myRawNumbers = extractNumbers(myNumbersText);
+
+            // 1. حساب التكرارات لجميع أرقام MDR
+            const mdrFreqMap = getFrequencyMap(mdrRawNumbers);
+            
+            // عرض جميع الأرقام مع التكرار (كل رقم مرة واحدة مع عدد مرات ظهوره)
+            displayAllNumbersWithFrequency(mdrFreqMap);
+            
+            // 2. الأرقام الفريدة في My Numbers (الموجودة في My Numbers وليست في MDR)
+            const mdrUniqueSet = new Set(mdrRawNumbers);
+            const myNumbersSet = new Set(myRawNumbers);
+            const uniqueCount = displayUniqueNumbers(myNumbersSet, mdrUniqueSet);
+            
+            // تحديث الإحصائيات
+            const totalMDR = mdrRawNumbers.length;
+            const uniqueMDR = mdrUniqueSet.size;
+            const totalMy = myRawNumbers.length;
+            const uniqueMy = myNumbersSet.size;
+            
+            totalMDRCountSpan.innerText = totalMDR;
+            uniqueMDRCountSpan.innerText = uniqueMDR;
+            totalMyNumbersCountSpan.innerText = totalMy;
+            uniqueMyCountSpan.innerText = uniqueMy;
+            
+            // تحديث معلومات الاستخراج
+            updateExtractInfo();
+        }
+
+        // دالة تحديث الـ extract info
         function updateExtractInfo() {
             const nums1 = extractNumbers(list1.value);
             const nums2 = extractNumbers(list2.value);
             const unique1 = new Set(nums1);
             const unique2 = new Set(nums2);
+            const total1 = nums1.length;
+            const total2 = nums2.length;
             
-            extractInfo1.innerHTML = `<i class="fas fa-check-circle"></i> تم استخراج ${unique1.size} رقم من التقرير`;
-            extractInfo2.innerHTML = `<i class="fas fa-check-circle"></i> تم استخراج ${unique2.size} رقم من قائمتك`;
+            extractInfo1.innerHTML = `<i class="fas fa-chart-line"></i> MDR: ${total1} رقم إجمالي | ${unique1.size} رقم فريد`;
+            extractInfo2.innerHTML = `<i class="fas fa-list-ul"></i> My Numbers: ${total2} رقم إجمالي | ${unique2.size} رقم فريد`;
         }
 
-        // Perform sorting
-        function performSort() {
-            const raw1 = list1.value;
-            const raw2 = list2.value;
-
-            const arr1 = extractNumbers(raw1);
-            const arr2 = extractNumbers(raw2);
-
-            const set1 = new Set(arr1);
-            const set2 = new Set(arr2);
-
-            // Numbers in set2 that are not in set1
-            const uniqueInSecond = [...set2].filter(item => !set1.has(item));
-            uniqueInSecond.sort();
-
-            // Display result
-            if (uniqueInSecond.length === 0) {
-                resultBox.innerText = 'لا توجد أرقام غير متكررة في المجموعة الثانية.';
-            } else {
-                resultBox.innerText = uniqueInSecond.join('\n');
-            }
-            countDisplay.innerText = uniqueInSecond.length;
-
-            // Update extract info
-            updateExtractInfo();
-        }
-
-        // Reset fields
+        // تفريغ جميع الحقول
         function resetFields() {
             list1.value = '';
             list2.value = '';
-            resultBox.innerText = 'اضغط على زر الفرز لعرض النتيجة...';
-            countDisplay.innerText = '0';
-            extractInfo1.innerHTML = '<i class="fas fa-robot"></i> ⏳ في انتظار اللصق والفرز';
-            extractInfo2.innerHTML = '<i class="fas fa-robot"></i> ⏳ في انتظار اللصق والفرز';
+            allNumbersBox.innerHTML = '<i class="fas fa-info-circle"></i> اضغط على زر التحليل لعرض جميع أرقام MDR مع عدد مرات التكرار';
+            uniqueNumbersBox.innerHTML = '<i class="fas fa-info-circle"></i> الأرقام الموجودة في My Numbers وليست في MDR';
+            totalUniqueBadge.innerText = '0';
+            uniqueCountBadge.innerText = '0';
+            totalMDRCountSpan.innerText = '0';
+            uniqueMDRCountSpan.innerText = '0';
+            totalMyNumbersCountSpan.innerText = '0';
+            uniqueMyCountSpan.innerText = '0';
+            extractInfo1.innerHTML = '<i class="fas fa-robot"></i> ⏳ في انتظار اللصق';
+            extractInfo2.innerHTML = '<i class="fas fa-robot"></i> ⏳ في انتظار اللصق';
         }
 
-        // Copy result
-        function copyResult() {
-            const text = resultBox.innerText;
-            if (!text || text === 'اضغط على زر الفرز لعرض النتيجة...' || text === 'لا توجد أرقام غير متكررة في المجموعة الثانية.') {
-                alert('لا يوجد نتيجة للنسخ أو النتيجة فارغة.');
+        // نسخ جميع الأرقام مع التكرار (بصيغة: الرقم : عدد المرات)
+        function copyAllNumbersWithFrequency() {
+            const items = document.querySelectorAll('#allNumbersBox .frequency-item');
+            if (items.length === 0) {
+                alert('لا توجد أرقام لعرضها أو قم بالتحليل أولاً.');
                 return;
             }
-            navigator.clipboard.writeText(text).then(() => {
-                alert('✅ تم نسخ الأرقام إلى الحافظة');
-            }).catch(() => {
-                alert('❌ تعذر النسخ، يرجى النسخ يدوياً');
+            
+            let copyText = 'الأرقام في MDR مع عدد مرات التكرار:\n';
+            copyText += '=' . repeat(50) + '\n';
+            
+            items.forEach(item => {
+                const numberSpan = item.querySelector('.frequency-number');
+                const countSpan = item.querySelector('.frequency-count');
+                if (numberSpan && countSpan) {
+                    let num = numberSpan.innerText.replace('📞 ', '');
+                    let cnt = countSpan.innerText.replace('🔄 ', '');
+                    copyText += `${num} : ${cnt}\n`;
+                }
             });
+            
+            navigator.clipboard.writeText(copyText).then(() => {
+                alert('✅ تم نسخ جميع الأرقام مع عدد مرات التكرار');
+            }).catch(() => alert('❌ فشل النسخ'));
         }
 
-        // Load example MDR report (نصوص متنوعة تحتوي أرقام دول مختلفة)
+        // نسخ الأرقام الفريدة (الأرقام فقط)
+        function copyUniqueNumbers() {
+            const uniqueRaw = uniqueNumbersBox.innerText;
+            if (!uniqueRaw || uniqueRaw.includes('لا توجد أرقام فريدة') || uniqueRaw.includes('اضغط على زر')) {
+                alert('لا توجد أرقام فريدة أو قم بالتحليل أولاً.');
+                return;
+            }
+            
+            // إذا كانت النتائج على شكل سطور مع 📱 ننظفها
+            const lines = uniqueRaw.split('\n');
+            let uniqueText = '';
+            for (let line of lines) {
+                let clean = line.replace('📱 ', '').trim();
+                if (clean && !clean.includes('الأرقام الموجودة') && !clean.includes('لا توجد')) {
+                    uniqueText += clean + '\n';
+                }
+            }
+            if (uniqueText === '') uniqueText = uniqueRaw;
+            
+            navigator.clipboard.writeText(uniqueText).then(() => {
+                alert('✅ تم نسخ الأرقام الفريدة');
+            }).catch(() => alert('❌ فشل النسخ'));
+        }
+
+        // الأمثلة التجريبية
         function loadExampleMDR() {
             list1.value = `XISORA Networks LTD | MDR & Summary Reports
 
 Date	Termination	Number	CLI	Currency	Payterm	Payout	Message
-2026-03-13 22:10:30	Ivory Coast Orange IN	2250705831025	Yandex	$	Weekly	0	Your confirmation code: 505403. AftfMNhsVm0
+2026-03-13 22:10:30	Ivory Coast Orange IN	2250705831025	Yandex	$	Weekly	0	Your confirmation code: 505403.
 2026-03-13 22:07:37	Ivory Coast Orange IN	2250713666969	Yandex	$	Weekly	0	Your confirmation code: 709-342.
 2026-03-13 22:07:36	Ivory Coast Orange IN	2250713666969	Yandex	$	Weekly	0	Your confirmation code: 123-001.
-2026-03-13 21:15:45	Ghana New 1	233238843891	Yandex	$	Weekly	0	Your confirmation code: 591289. AftfMNhsVm0
+2026-03-13 21:15:45	Ghana New 1	233238843891	Yandex	$	Weekly	0	Your confirmation code: 591289. 
 2026-03-13 14:43:06	Ghana New 1	233267260561	Yandex	$	Weekly	0	Your confirmation code: 975-471.
-
-Lamix SMS | SMS CDR Stats
-
-Date	Range	Number	CLI	SMS	Currency	My Payout
-2026-03-13 23:22:42	Comoros LX 05Feb	2694014419	Yandex	#Your confirmation code 164521 AftfMNhsVm0	$	0
-2026-03-13 15:33:23	Tanzania LX 1J	255716648060	Bolt	Your ride from 4 Mtaa Mwananyamala to Bucha has been approved	$	0
-2026-03-13 04:14:18	Malaysia Digi LX 10Mar	60102961810	Yandex	729-554 — код для входа в Яндекс	$	0`;
+2026-03-13 14:43:06	Ghana New 1	233238843891	Yandex	$	Weekly	0	Second duplicate test.
+2026-03-13 23:22:42	Comoros LX 05Feb	2694014419	Yandex	$	0
+2026-03-13 23:22:42	Comoros LX 05Feb	2694014419	Yandex	$	0
+2026-03-13 23:22:42	Comoros LX 05Feb	2694014419	Yandex	$	0
+2026-03-13 15:33:23	Tanzania LX 1J	255716648060	Bolt	Your ride	$	0
+2026-03-13 04:14:18	Malaysia Digi LX 10Mar	60102961810	Yandex	729-554 — код для входа	$	0
+2026-03-13 04:14:18	Malaysia Digi LX 10Mar	60102961810	Yandex	729-554 — duplicate again	$	0
+2026-03-13 04:14:18	Malaysia Digi LX 10Mar	551199887766	Yandex	Test single number	$	0`;
             updateExtractInfo();
         }
 
-        // Load example My Numbers (أرقام متنوعة)
         function loadExampleMyNumbers() {
             list2.value = `2250705831025
 2250713666969
@@ -595,20 +820,24 @@ Date	Range	Number	CLI	SMS	Currency	My Payout
 60102961810
 966501234567
 447911234567
-201234567890`;
+201234567890
+999888777666`;
             updateExtractInfo();
         }
 
-        // Event listeners
-        sortBtn.addEventListener('click', performSort);
+        // Event Listeners
+        sortBtn.addEventListener('click', performAnalysis);
         resetBtn.addEventListener('click', resetFields);
-        copyBtn.addEventListener('click', copyResult);
+        copyAllNumbersBtn.addEventListener('click', copyAllNumbersWithFrequency);
+        copyUniqueBtn.addEventListener('click', copyUniqueNumbers);
         example1.addEventListener('click', loadExampleMDR);
         example2.addEventListener('click', loadExampleMyNumbers);
-
-        // Update extract info on input
+        
         list1.addEventListener('input', updateExtractInfo);
         list2.addEventListener('input', updateExtractInfo);
+        
+        // initialize extract info on page load
+        updateExtractInfo();
     })();
 </script>
 </body>
